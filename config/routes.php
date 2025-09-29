@@ -2,10 +2,10 @@
 
 return [
     '/home' => function() {
-        include_once __DIR__ . '/../views/pages/home.php';
+        include_once APP_PATH . '/../views/pages/home.php';
     },
         '/home' => function() {
-        include_once __DIR__ . '/../views/pages/movies.php';
+        include_once APP_PATH . '/../views/pages/movies.php';
     },
 ];
 
