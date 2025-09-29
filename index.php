@@ -4,8 +4,8 @@ define('APP_PATH', __DIR__); #корневой путь нашего прило�
 
 require_once APP_PATH . '/vendor/autoload.php';
 
-$routes = require_once APP_PATH . '/config/routes.php';
+use App\app;
 
-$uri = $_SERVER['REQUEST_URI'];
+$app = new App();
 
-$routes[$uri]();
+$app->run();
