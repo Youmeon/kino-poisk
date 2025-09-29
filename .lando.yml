@@ -1,0 +1,4 @@
+name: kino
+recipe: lamp
+config:
+  webroot: .
