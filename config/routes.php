@@ -2,6 +2,11 @@
 
 return [
     '/home' => function() {
-        echo '<h1>Home page</h1>';
+        include_once __DIR__ . '/../views/pages/home.php';
+    },
+        '/home' => function() {
+        include_once __DIR__ . '/../views/pages/movies.php';
     },
 ];
+
+
