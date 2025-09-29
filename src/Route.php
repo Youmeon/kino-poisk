@@ -14,6 +14,7 @@ class Route
 
     // метод вызывается на классе, а не на объекте. Принимает $url и $action(обработчик маршрута) 
     // возвращает new static (создаёт новый объект текущего класса)
+    // нужны для удобного создания маршрутов
     public static function get(string $uri, $action): static
     {
         return new static($uri, 'GET', $action);
