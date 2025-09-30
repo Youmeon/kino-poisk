@@ -16,37 +16,44 @@ class Router
         $this->initRoutes();
     }
     // передаём uri запроса чтобы было понятно какой маршрут мы вызываем
-    public function dispatch(string $uri): void
+    public function dispatch(string $uri, string $method): void
     {
+        $route = $this->findRoute($uri, $method);
+
+        if (! $route) {
+            $this->notFound(); // ошибка
+        }
+
         $routes = $this->getRoutes();
 
         // ключ $uri->вызов /home
         $routes[$uri]();
     }
 
+    private function notFound()
+    {
+        echo '404 | Not Found';
+        exit;
+    }
+
+    //по http маршруту в группе ищет метод uri
+    private function findRoute(string $uri, string $method): Route|false
+    {
+        // если маршрут не найден в списке возвращаем false
+        if (!isset($this->routes[$method][$uri])) {
+            return false;
+        }
+        return $this->routes[$method][$uri];
+    }
+
     private function initRoutes()
     {
         $routes = $this->getRoutes();
-
-        /* 
-        $this->routes = [
-            'POST' = [],
-            'GET' = [],
-        ]
-        
-        $routes = [
-            'GET' = [
-                /pipiska/2 => 
-            ]
-        ]
-
-        method=GET, uri=/pipiska/2
-        */
-
+        //сортируем пмаршруты, такая группировка позволит гибче с ними взаимодействовать
         foreach ($routes as $route) {
             $this->routes[$route->getMethod()][$route->getUri()] = $route;
         }
-        dd(['this local function $routes' => $routes, 'this global class array $routes' => $this->routes]);
+        //        dd(['this local function $routes' => $routes, 'this global class array $routes' => $this->routes]);
     }
 
     /**
