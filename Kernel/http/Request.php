@@ -1,6 +1,6 @@
 <?php
 
-namespace App\http;
+namespace App\Kernel\http;
 
 class Request
 {

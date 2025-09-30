@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App;
+namespace App\Kernel\Router;
 
 // создаём класс Route, каждый объект этого класса будет хранить информацию об одном URL
 class Route

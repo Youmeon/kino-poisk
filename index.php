@@ -4,7 +4,7 @@ define('APP_PATH', __DIR__); #корневой путь нашего прило�
 
 require_once APP_PATH . '/vendor/autoload.php';
 
-use App\App;
+use App\Kernel\App;
 
 $app = new App();
 

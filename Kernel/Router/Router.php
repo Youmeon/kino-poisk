@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Kernel\Router;
 
 use App\Controllers\HomeController;
 use App\Controllers\MoviesController;
-use App\Route;
+use App\Kernel\Router\Route;
 
 class Router
 {
