@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Router;
+namespace App;
 
 // создаём класс Route, каждый объект этого класса будет хранить информацию об одном URL
 class Route
@@ -23,5 +23,13 @@ class Route
     public static function post(string $uri, $action): static
     {
         return new static($uri, 'POST', $action);
+    }
+    public function getMethod(): string
+    {
+        return $this->method;
+    }
+    public function getUri(): string
+    {
+        return $this->uri;
     }
 }
