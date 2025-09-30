@@ -5,6 +5,7 @@ namespace App\Kernel\Router;
 use App\Controllers\HomeController;
 use App\Controllers\MoviesController;
 use App\Kernel\Router\Route;
+use App\Kernel\View\View;
 
 class Router
 {
@@ -13,8 +14,9 @@ class Router
         'POST' => [],
     ];
 
-    public function __construct()
-    {
+    public function __construct(
+        private View $view
+    ) {
         $this->initRoutes();
     }
     // передаём uri запроса чтобы было понятно какой маршрут мы вызываем
@@ -29,19 +31,22 @@ class Router
         if (is_array($route->getAction())) {
             [$controller, $action] = $route->getAction();
 
+            /** @var Controller $controller() */
             $controller = new $controller();
 
-            $controller->$action();
+            // $controller->$action();
 
+            call_user_func([$controller, 'setView'], $this->view);
             call_user_func([$controller, $action]);
         } else {
             call_user_func($route->getAction());
         }
-        $route->getAction()();
+        // $route->getAction()();
     }
 
     private function notFound()
     {
+        http_response_code(404);
         echo '404 | Not Found';
         exit;
     }

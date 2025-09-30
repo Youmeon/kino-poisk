@@ -25,7 +25,7 @@ class Request
     public function uri(): string
     {
         //убираем лишнюю информацию (указываем некоторую строку и элемент после которого строка будет обрезана)
-        return strtok($this->server['REQUEST_URI'], `?`);
+        return strtok($this->server['REQUEST_URI'], '?');
     }
     public function method(): string
     {

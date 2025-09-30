@@ -7,10 +7,8 @@ use App\Kernel\View\View;
 
 class MoviesController extends Controller
 {
-    public static function index(): void
+    public function index(): void
     {
-        $view = new View();
-
-        $view->page('movies');
+        $this->view('movies');
     }
 }
