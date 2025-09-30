@@ -32,4 +32,8 @@ class Route
     {
         return $this->uri;
     }
+    public function getAction()
+    {
+        return $this->action;
+    }
 }

@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Controllers\HomeController;
+use App\Controllers\MoviesController;
 use App\Route;
 
 class Router
@@ -20,14 +22,22 @@ class Router
     {
         $route = $this->findRoute($uri, $method);
 
-        if (! $route) {
+        if (!$route) {
             $this->notFound(); // ошибка
         }
 
-        $routes = $this->getRoutes();
+        if (is_array($route->getAction())) {
+            [$controller, $action] = $route->getAction();
 
-        // ключ $uri->вызов /home
-        $routes[$uri]();
+            $controller = new $controller();
+
+            $controller->$action();
+
+            call_user_func([$controller, $action]);
+        } else {
+            call_user_func($route->getAction());
+        }
+        $route->getAction()();
     }
 
     private function notFound()
