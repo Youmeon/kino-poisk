@@ -34,6 +34,6 @@ class Request
     //функция для вывода нужных данных из post-запроса/get-запроса через ключ (чтобы не выводить всё сразу)
     public function input(string $key, $default = null): mixed //дефолтное значение в случае если не получим какое то значение 
     {
-        return $this->post[$key] ?? $default;
+        return $this->post[$key] ?? $this->get[$key] ?? $default; //если в массиве ничего не найдено возвращаем $default, перед этим получаем значене из get
     }
 }
