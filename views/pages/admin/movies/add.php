@@ -2,13 +2,14 @@
 
 /**
  * @var \App\Kernel\View\View $view //подсказываем что $view инстанс класса View
+ * // в action нет пути admin/movies/add
  */
 ?>
 
 <?php $view->component('start') ?>
 <h1>Add movie page</h1>
 
-<from action="" ;>
+<form action="" method="post">
     <p>Name</p>
     <div>
         <input type="text" name="name">
@@ -16,5 +17,5 @@
     <div>
         <button>Add</button>
     </div>
-</from>
+</form>
 <?php $view->component('end') ?>

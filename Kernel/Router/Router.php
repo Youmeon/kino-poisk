@@ -4,6 +4,7 @@ namespace App\Kernel\Router;
 
 use App\Controllers\HomeController;
 use App\Controllers\MoviesController;
+use App\Kernel\http\Request;
 use App\Kernel\Router\Route;
 use App\Kernel\View\View;
 
@@ -15,7 +16,8 @@ class Router
     ];
 
     public function __construct(
-        private View $view
+        private View $view,
+        private Request $request
     ) {
         $this->initRoutes();
     }
@@ -37,6 +39,7 @@ class Router
             // $controller->$action();
 
             call_user_func([$controller, 'setView'], $this->view);
+            call_user_func([$controller, 'setRequest'], $this->request);
             call_user_func([$controller, $action]);
         } else {
             call_user_func($route->getAction());
@@ -63,11 +66,11 @@ class Router
     private function initRoutes()
     {
         $routes = $this->getRoutes();
-        //сортируем пмаршруты, такая группировка позволит гибче с ними взаимодействовать
+        // сортируем пмаршруты, такая группировка позволит гибче с ними взаимодействовать
         foreach ($routes as $route) {
             $this->routes[$route->getMethod()][$route->getUri()] = $route;
         }
-        //        dd(['this local function $routes' => $routes, 'this global class array $routes' => $this->routes]);
+        // dd(['this local function $routes' => $routes, 'this global class array $routes' => $this->routes]);
     }
 
     /**

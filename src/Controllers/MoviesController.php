@@ -13,6 +13,11 @@ class MoviesController extends Controller
     }
     public function add(): void
     {
-        $this->view('/admin/movies/add');
+        $this->view('admin/movies/add');
+    }
+    public function store() // отвечает за сохранение сущности
+    {
+        dd($this->request());
+        dd('store');
     }
 }
