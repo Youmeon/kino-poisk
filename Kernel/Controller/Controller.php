@@ -38,8 +38,8 @@ abstract class Controller
         $this->redirect = $redirect;
     }
 
-    public function redirect(string $uri): Redirect
+    public function redirect(string $uri): void
     {
-        return $this->redirect;
+        $this->redirect->to($uri);
     }
 }

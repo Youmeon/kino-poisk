@@ -7,6 +7,7 @@ use App\Controllers\MoviesController;
 use App\Kernel\http\Request;
 use App\Kernel\Router\Route;
 use App\Kernel\View\View;
+use App\Kernel\http\Redirect;
 
 class Router
 {
@@ -17,7 +18,8 @@ class Router
 
     public function __construct(
         private View $view,
-        private Request $request
+        private Request $request,
+        private Redirect $redirect,
     ) {
         $this->initRoutes();
     }
@@ -40,6 +42,7 @@ class Router
 
             call_user_func([$controller, 'setView'], $this->view);
             call_user_func([$controller, 'setRequest'], $this->request);
+            call_user_func([$controller, 'setRedirect'], $this->redirect);
 
             call_user_func([$controller, $action]);
         } else {

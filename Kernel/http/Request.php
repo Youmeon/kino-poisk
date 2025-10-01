@@ -45,6 +45,7 @@ class Request
     {
         $this->validator = $validator;
     }
+
     public function validate(array $rules): bool
     {
         $data = [];
