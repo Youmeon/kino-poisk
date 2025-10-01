@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @var \App\Kernel\View\View //подсказываем что $view инстанс класса View
+ * @var \App\Kernel\View\View $view //подсказываем что $view инстанс класса View
  */
 ?>
 
