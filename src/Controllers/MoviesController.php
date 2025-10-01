@@ -18,14 +18,23 @@ class MoviesController extends Controller
     }
     public function store() // отвечает за сохранение сущности
     {
-        $data = ['name' => ''];
-        $rules = ['name' => ['required', 'min:3', 'max:225']];
+        $validation = $this->request()->validate([
+            'name' => ['required', 'min:3', 'max:50']
+        ]);
 
-        $validator = new Validator();
+        if (! $validation) {
+            dd('validation failed', $this->request()->errors());
+        }
+        dd('validation passed');
+        // $this->request()->method();
+        // $data = ['name' => ''];
+        // $rules = ['name' => ['required', 'min:3', 'max:225']];
 
-        $validator->validate($data, $rules);
+        // $validator = new Validator();
 
-        dd($validator->validate($data, $rules), $validator->errors());
+        // $validator->validate($data, $rules);
+
+        // dd($validator->validate($data, $rules), $validator->errors());
         // dd($this->request());
         // dd('store');
     }
