@@ -4,9 +4,9 @@ namespace App\Kernel\http;
 
 class Redirect
 {
-    public function to(string $uri)
+    public function to(string $url)
     {
-        header("location $uri");
+        header("Location $url");
         exit;
     }
 }

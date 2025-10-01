@@ -2,6 +2,7 @@
 
 namespace App\Kernel\Controller;
 
+use App\Kernel\http\Redirect;
 use App\Kernel\http\Request;
 use App\Kernel\View\View;
 
@@ -10,6 +11,8 @@ abstract class Controller
     private View $view;
 
     private Request $request;
+
+    private Redirect $redirect;
 
     public function request(): Request
     {
@@ -28,5 +31,15 @@ abstract class Controller
     public function view(string $name): void
     {
         $this->view->page($name);
+    }
+
+    public function setRedirect(Redirect $redirect): void
+    {
+        $this->redirect = $redirect;
+    }
+
+    public function redirect(string $uri): Redirect
+    {
+        return $this->redirect;
     }
 }
