@@ -7,6 +7,7 @@ use App\Kernel\http\Request;
 use App\Kernel\Validator\Validator;
 use App\Kernel\View\View;
 use App\Kernel\http\Redirect;
+use App\Kernel\Session\Session;
 
 class Container
 {
@@ -17,6 +18,8 @@ class Container
     public readonly View $view;
 
     public readonly Validator $validator;
+
+    public readonly Session $session;
 
     public readonly Redirect $redirect;
 
@@ -32,6 +35,7 @@ class Container
         $this->validator = new Validator();
         $this->request->setValidator($this->validator);
         $this->redirect = new Redirect();
-        $this->router = new Router($this->view, $this->request, $this->redirect);
+        $this->session = new Session();
+        $this->router = new Router($this->view, $this->request, $this->redirect, $this->session);
     }
 }

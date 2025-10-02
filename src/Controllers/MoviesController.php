@@ -19,6 +19,8 @@ class MoviesController extends Controller
     }
     public function store() // отвечает за сохранение сущности
     {
+        dd($this->session());
+
         $validation = $this->request()->validate([
             'name' => ['required', 'min:3', 'max:50']
         ]);
