@@ -19,13 +19,14 @@ class MoviesController extends Controller
     }
     public function store() // отвечает за сохранение сущности
     {
-        dd($this->session());
-
         $validation = $this->request()->validate([
             'name' => ['required', 'min:3', 'max:50']
         ]);
 
         if (! $validation) {
+            foreach ($this->request()->errors() as $field => $errors) {
+                $this->session()->set($field, $errors);
+            }
             $this->redirect('/admin/movies/add');
             // (new Redirect())->to('/admin/movies/add');
             // dd('validation failed', $this->request()->errors());

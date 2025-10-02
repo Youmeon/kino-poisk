@@ -3,9 +3,13 @@
 namespace App\Kernel\View;
 
 use App\Kernel\Exeptions\ViewNotFoundExeption;
+use App\Kernel\Session\Session;
 
 class View
 {
+    public function __construct(
+        private Session $session,
+    ) {}
     public function page(string $name): void //принимает в качестве строки название страницы
     {
         //берем название файла из папки views pages
@@ -16,9 +20,7 @@ class View
         }
 
         // то что указано как 'view' будет являться переменной в home/movies
-        extract([
-            'view' => $this
-        ]);
+        extract($this->defaultData());
 
         include_once $viewPath;
     }
@@ -31,5 +33,13 @@ class View
             return; // чтобы не было warning
         }
         include_once APP_PATH . "/views/components/$name.php"; //берем название файла из папки views pages
+    }
+
+    private function defaultData(): array
+    {
+        return [
+            'view' => $this,
+            'session' => $this->session,
+        ];
     }
 }
